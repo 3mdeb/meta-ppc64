@@ -6,3 +6,5 @@ SRC_URI_append = " file://defconfig"
 
 COMPATIBLE_MACHINE_qemuppc64 = "${MACHINE}"
 COMPATIBLE_MACHINE_qemuppc64le = "${MACHINE}"
+
+INSANE_SKIP_kernel-image-zimage.epapr_qemuppc64 = "arch textrel"
