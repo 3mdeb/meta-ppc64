@@ -1,0 +1,44 @@
+From 61d85d94a9cfcea38bdf4837d0c1c5fe76871e23 Mon Sep 17 00:00:00 2001
+From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+Date: Fri, 23 Oct 2020 22:43:21 +0200
+Subject: [PATCH] runqemu: add qemuppc64 target
+
+Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+---
+ scripts/runqemu | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/scripts/runqemu b/scripts/runqemu
+index e5e66f345352..5ce66ee266d5 100755
+--- a/scripts/runqemu
++++ b/scripts/runqemu
+@@ -1265,7 +1265,7 @@ class BaseConfig(object):
+         """attempt to determine the appropriate qemu-system binary"""
+         mach = self.get('MACHINE')
+         if not mach:
+-            search = '.*(qemux86-64|qemux86|qemuarm64|qemuarm|qemumips64|qemumips64el|qemumipsel|qemumips|qemuppc).*'
++            search = '.*(qemux86-64|qemux86|qemuarm64|qemuarm|qemumips64|qemumips64el|qemumipsel|qemumips|qemuppc|qemuppc64).*'
+             if self.rootfs:
+                 match = re.match(search, self.rootfs)
+                 if match:
+@@ -1288,6 +1288,8 @@ class BaseConfig(object):
+             qbsys = 'x86_64'
+         elif mach == 'qemuppc':
+             qbsys = 'ppc'
++        elif mach == 'qemuppc64':
++            qbsys = 'ppc64'
+         elif mach == 'qemumips':
+             qbsys = 'mips'
+         elif mach == 'qemumips64':
+@@ -1303,7 +1305,7 @@ class BaseConfig(object):
+         else:
+             logger.error("Unable to determine QEMU PC System emulator for %s machine." % mach)
+             logger.error("As %s is not among valid QEMU machines such as," % mach)
+-            logger.error("qemux86-64, qemux86, qemuarm64, qemuarm, qemumips64, qemumips64el, qemumipsel, qemumips, qemuppc")
++            logger.error("qemux86-64, qemux86, qemuarm64, qemuarm, qemumips64, qemumips64el, qemumipsel, qemumips, qemuppc, qemuppc64")
+             raise RunQemuError("Set qb_system_name with suitable QEMU PC System emulator in .*qemuboot.conf.")
+ 
+         return 'qemu-system-%s' % qbsys
+-- 
+2.25.1
+
