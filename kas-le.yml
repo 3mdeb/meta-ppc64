@@ -3,17 +3,15 @@ header:
 
 distro: poky
 
-machine: qemuppc64le
+machine: qemuppc64
 
 target:
   - core-image-full-cmdline
 
 repos:
-  meta-ppc64:
-
   poky:
     url: https://git.yoctoproject.org/git/poky
-    refspec: 52276e385d0c80c3e6f2a3f142289dc09697556f
+    refspec: ef910d7a51a7ef81b725e3cc7b80c2aeb7347ead
     layers:
       meta:
       meta-poky:
