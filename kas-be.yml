@@ -3,17 +3,15 @@ header:
 
 distro: poky
 
-machine: qemuppc64
+machine: qemuppc64be
 
 target:
   - core-image-full-cmdline
 
 repos:
-  meta-ppc64:
-
   poky:
-    url: https://git.yoctoproject.org/git/poky
-    refspec: 52276e385d0c80c3e6f2a3f142289dc09697556f
+    url: https://github.com/3mdeb/poky
+    refspec: 5113b3d5e7ec73dfb1ca561424c4c574174d0dd4
     layers:
       meta:
       meta-poky:
@@ -21,7 +19,7 @@ repos:
 
   meta-openembedded:
     url: https://git.openembedded.org/meta-openembedded
-    refspec: bb460fb3cbe1953c7b2f9a40d2226989e8b07670
+    refspec: 4fe10656553bc4afa293796c57ae99c728937ada
     layers:
       meta-oe:
       meta-multimedia:
@@ -49,3 +47,5 @@ local_conf_header:
         ABORT,${DL_DIR},100M,1K \
         ABORT,${SSTATE_DIR},100M,1K \
         ABORT,/tmp,10M,1K"
+  debug: |
+    EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
