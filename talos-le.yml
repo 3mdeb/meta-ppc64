@@ -1,0 +1,60 @@
+header:
+  version: 8
+
+distro: poky
+
+machine: talos-ii-le
+
+target:
+  - core-image-full-cmdline
+
+repos:
+  meta-ppc64:
+
+  poky:
+    url: https://github.com/3mdeb/poky
+    refspec: 5113b3d5e7ec73dfb1ca561424c4c574174d0dd4
+    layers:
+      meta:
+      meta-poky:
+      meta-yocto-bsp:
+
+  meta-openembedded:
+    url: https://git.openembedded.org/meta-openembedded
+    refspec: 4fe10656553bc4afa293796c57ae99c728937ada
+    layers:
+      meta-oe:
+      meta-multimedia:
+      meta-networking:
+      meta-python:
+      meta-filesystems:
+
+  meta-linux-mainline:
+    url: https://gitlab.com/pbarker.dev/meta-linux-mainline.git
+    refspec: 4b288396eff43fe9b1a233aed1ce9b48329a2eb6
+
+bblayers_conf_header:
+  standard: |
+    POKY_BBLAYERS_CONF_VERSION = "2"
+    BBPATH = "${TOPDIR}"
+    BBFILES ?= ""
+local_conf_header:
+  standard: |
+    CONF_VERSION = "1"
+    PACKAGE_CLASSES = "package_rpm"
+    SDKMACHINE = "x86_64"
+  diskmon: |
+    BB_DISKMON_DIRS = "\
+        STOPTASKS,${TMPDIR},1G,100K \
+        STOPTASKS,${DL_DIR},1G,100K \
+        STOPTASKS,${SSTATE_DIR},1G,100K \
+        STOPTASKS,/tmp,100M,100K \
+        ABORT,${TMPDIR},100M,1K \
+        ABORT,${DL_DIR},100M,1K \
+        ABORT,${SSTATE_DIR},100M,1K \
+        ABORT,/tmp,10M,1K"
+  debug: |
+    EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
+  kernel_config: |
+    KBUILD_DEFCONFIG = "powernv_defconfig"
+    KCONFIG_MODE = "alldefconfig"
