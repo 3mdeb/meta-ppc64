@@ -3,7 +3,7 @@ header:
 
 distro: poky
 
-machine: qemuppc64be
+machine: qemuppc64
 
 target:
   - core-image-full-cmdline
@@ -11,7 +11,7 @@ target:
 repos:
   poky:
     url: https://github.com/3mdeb/poky
-    refspec: 5113b3d5e7ec73dfb1ca561424c4c574174d0dd4
+    refspec: 00cd78d9decebcf5201bbdebaef765ecba22f7d0
     layers:
       meta:
       meta-poky:
